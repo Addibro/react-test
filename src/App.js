@@ -1,12 +1,32 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
+import CardList from "./CardList";
+import Form from "./Form";
+import NotFound from "./NotFound";
 import "./App.css";
 
-const Login = props => {
-  return <div />;
-};
-
+//Component can't change the state of its parent, but can pass properties to child components
 class App extends Component {
+  // add new card function
+  addNewCard = cardInfo => {
+    console.log(cardInfo);
+    if (cardInfo.message !== "Not Found") {
+      this.userFound(true);
+      this.setState(prevState => ({
+        cards: prevState.cards.concat(cardInfo)
+      }));
+    } else this.userFound(false);
+  };
+
+  userFound = found => {
+    this.setState({ userFound: found });
+  };
+
+  // to let both CardList and Form access to cards data
+  state = {
+    cards: [],
+    userFound: true
+  };
   render() {
     return (
       <div className="App">
@@ -17,7 +37,10 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Login />
+        {!this.state.userFound && <NotFound />} {/* if a user is not found*/}
+        {/* lets pass a function to Form's props, Form component will then be able to access it with this.props.onSubmit*/}
+        <Form onSubmit={this.addNewCard} />
+        <CardList cards={this.state.cards} />
       </div>
     );
   }
