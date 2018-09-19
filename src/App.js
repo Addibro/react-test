@@ -6,7 +6,6 @@ const Login = props => {
   return <div />;
 };
 
-console.log("messy code");
 class App extends Component {
   render() {
     return (
