@@ -5,7 +5,8 @@ import Form from "./Form";
 import NotFound from "./NotFound";
 import "./App.css";
 
-//Component can't change the state of its parent, but can pass properties to child components
+//Component can't change the state of its parent,
+// but can pass properties to child components
 class App extends Component {
   // add new card function
   addNewCard = cardInfo => {
@@ -38,7 +39,9 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         {!this.state.userFound && <NotFound />} {/* if a user is not found*/}
-        {/* lets pass a function to Form's props, Form component will then be able to access it with this.props.onSubmit*/}
+        {/* lets pass a function to Form's props, 
+        Form component will then be able to access it 
+        with this.props.onSubmit*/}
         <Form onSubmit={this.addNewCard} />
         <CardList cards={this.state.cards} />
       </div>
@@ -47,5 +50,6 @@ class App extends Component {
 }
 
 // if a module defines a default export
-// you can import that default export without the curly braces: import foo from 'foo'
+// you can import that default export
+// without the curly braces in ES6: import foo from 'foo'
 export default App;
